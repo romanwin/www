@@ -1,0 +1,53 @@
+<ion-side-menus enable-menu-with-back-views="false" ng-controller="MenuCtrl as vm">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable right-buttons">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-positive ios-arrow-right">
+      <h1 class="title">Right</h1>
+    </ion-header-bar>
+    <ion-content>
+
+      <ion-list class=text-right" ng-repeat="list in vm.menu_list.ROWSET.ROW | filter:{ENABLE:'Y'}">
+        <ion-item menu-close ng-click="itemOnClick(list.DOC_TYPE)" class="item">
+          <a class=text-right">{{list.DOC_DESCR}} ( {{list.COUNT}} )</a>
+        </ion-item>
+      </ion-list>
+      <ion-list class=text-right" ng-repeat="list in vm.menu_list.ROWSET.ROW | filter:{ENABLE:'N'}">
+        <ion-item menu-close class="item disabled">
+          <a class=text-right">{{list.DOC_DESCR}} ( {{list.COUNT}} )</a>
+        </ion-item>
+      </ion-list>
+      <!-- End Added By R.W. -->
+      <!--
+      <ion-list>
+        <ion-item menu-close href="#/app/pincode">
+          PinCode
+        </ion-item>
+        <ion-item menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item menu-close href="#/app/search">
+          Search
+        </ion-item>
+        <ion-item menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item menu-close href="#/app/playlists">
+          Playlists
+        </ion-item>
+      </ion-list>
+      -->
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
