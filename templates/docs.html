@@ -1,4 +1,4 @@
-<ion-view view-title="Docs" class="bar-positive" ng-controller="DocsCtrl as vm">
+<ion-view view-title="Docs" class="bar-positive" ng-controller="DocsCtrl as vm" ng-init="init()">
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="doclist in docslist.ROWSET.ROW" href="#/app/docs/{{doclist.DOC_INIT_ID}}">

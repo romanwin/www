@@ -1,10 +1,28 @@
 /**
  * Created by User on 22/09/2015.
  */
-var module = angular.module('starter.MenuCtrl', ['ionic' , 'ngStorage' , 'ui.router']);
+var module = angular.module('starter.MenuCtrl', [  'ionic'
+                                                 , 'ngStorage'
+                                                 , 'ui.router'
+                                                 , 'starter.services'
+                                                ]
+);
 
-module.controller('MenuCtrl', function($scope, $state , $ionicModal, $timeout) {
+module.controller('MenuCtrl' ,[ '$scope'
+                              , '$state'
+                              , '$ionicModal'
+                              , '$timeout'
+                              , '$sessionStorage'
+                              , 'PinCodeChecker'
+                              , DocsFuncCtrl]);
 
+//module.controller('MenuCtrl', function($scope, $state , $ionicModal, $timeout) {
+function DocsFuncCtrl ($scope , $state ,$ionicModal , $timeout , $sessionStorage , PinCodeChecker){
+
+    $scope.init = function(){
+        console.log('MenuCtrl.log');
+        PinCodeChecker.PinCodeCheckerFct;
+    }
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -19,12 +37,21 @@ module.controller('MenuCtrl', function($scope, $state , $ionicModal, $timeout) {
     //-- 21/09/2015  R.W.
     //----------------------------------------------------------
     $scope.itemOnClick = function(docType){
-        var pathByType;
-        if(docType === "HR"){
-            pathByType = app_config.path_by_type.HR;
-        }
 
-        $state.go(pathByType);
+        var pinCodeRequired = $sessionStorage.pinCodeRequired;
+
+
+        if(pinCodeRequired === true){
+            $state.go('app.pincode');
+        }
+        else {
+            var pathByType;
+            if (docType === "HR") {
+                pathByType = app_config.path_by_type.HR;
+            }
+
+            $state.go(pathByType);
+        }
     };
     //----------------------------------------------------------
     //-- When        Who          Description
@@ -71,5 +98,5 @@ module.controller('MenuCtrl', function($scope, $state , $ionicModal, $timeout) {
             $scope.closeLogin();
         }, 1000);
     };
-});
+};
 
